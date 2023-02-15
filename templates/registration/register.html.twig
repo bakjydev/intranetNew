@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <div class="navbar">{% include ('/navbar/index.html.twig') %}</div>
+    {% apply inline_css %}
+        <head>
+            <style>
+                .btn-outline {
+                    color: white;
+                    background-color: #F57C47;
+                }
+
+                .marginDiv {
+                    margin-bottom: 4rem;
+                }
+
+                .register {
+                    background-color: rgb(245, 124, 71, 30%);
+                    padding: 2rem;
+                    border-radius: 8px;
+                }
+
+                .title {
+                    display: flex;
+                    align-items: end;
+                    justify-content: end;
+                    margin-bottom: 0.5rem;
+                }
+
+                h1 {
+                    font-size: 4rem;
+                }
+            </style>
+        </head>
+        <div class="container marginDiv">
+            {{ form_start(registrationForm) }}
+            <div class="row">
+                <div class="col-8 m-auto">
+                    <div class="row">
+                        <div class="col-4">
+                        </div>
+                        <div class="col-8 title">
+                            <h1>Inscription</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8 m-auto register form-floating">
+
+                    {{ form_row(registrationForm.prenom) }}
+                    {{ form_row(registrationForm.nom) }}
+                    {{ form_row(registrationForm.email) }}
+
+                    {{ form_row(registrationForm.plainPassword, {
+                        label: 'Password'
+                    }) }}
+
+                    {{ form_row(registrationForm.agreeTerms) }}
+
+                    <button type="submit" class=" btn btn-outline btn-lg">Register</button>
+                </div>
+                {{ form_end(registrationForm) }}
+            </div>
+        </div>
+    {% endapply %}
+{% endblock %}

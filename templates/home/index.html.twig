@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+
+    <style>
+        .col-3 {
+            margin: 1rem;
+        }
+    </style>
+
+    <div class="navbar">{% include ('/navbar/index.html.twig') %}</div>
+
+    <div class="row d-flex align-items-center justify-content-left">
+        {% if is_granted('ROLE_USERSIMPLE') %}
+            <div class="col-2">
+                <div class="d-grid gap-2 mx-auto">
+                    <div class="card">
+                        <h5 class="card-header">BAKJY booking</h5>
+                        <div class="card-body">
+                            <h5 class="card-title">Réservation de la salle de réunion</h5>
+                            <p class="card-text">Vous souhaitez réserver la salle de réunion, passez par cet outil.</p>
+                            <a href="#" class="btn btn-primary">Réserver</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h5 class="card-header">Featured</h5>
+                        <div class="card-body">
+                            <h5 class="card-title">Special title treatment</h5>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional
+                                content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card text-center">
+                    <div class="card-header">
+                        Derniers arcticles
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Special title treatment</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                    <div class="card-footer text-muted">
+                        2 days ago
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card text-center mb-2">
+                    <div class="card-header">
+                        Welcome
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Bienvenu sur votre espace</h5>
+                        <p class="card-text">Pour toute questions envoyer un mail à romain@bakjy.com ou
+                            anais@bakjy.com</p>
+                        <a href="mailto:romain@bakjy.com ?subject=Intranet &cc=anais@bakjy.com"
+                           class="btn btn-primary">Entrer en contact</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        Elements utiles
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Sky riviera</h5>
+
+                        <ul>
+                            <li>Lockbox : azerty</li>
+                            <li>Code WIFI: azerty</li>
+                            <li>Code barriere: azerty</li>
+                        </ul>
+
+                        <h5 class="card-title">La Founderie</h5>
+
+                        <ul>
+                            <li>Code WIFI: Dreamteam2022</li>
+                            <li>Code porte d'entrée:<br> porte 1: 16A97 <br> porte 2: 28B36</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-2">
+                <div class="card text-center">
+                    <div class="card-header">
+                        Prochains anniversaire
+                    </div>
+                    <div class="card-body">
+                        {% for user in userRepository %}
+                            <p class="">{{ user.prenom }} {{ user.nom }}</p>
+                            <p class="">{{ user.birthday|date('d-m-Y') }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+            <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_gxaD1dLQ25.json" background="transparent"
+                           speed="1" style="width: auto; height: 30em;" loop autoplay></lottie-player>
+        {% endif %}
+    </div>
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+
+    <style>
+        .col-3 {
+            margin: 1rem;
+        }
+    </style>
+
+    <div class="navbar">{% include ('/navbar/index.html.twig') %}</div>
+    <h1>Liste des utilisateurs</h1>
+
+    <table class="table">
+        <thead>
+        <th>ID</th>
+        <th>Prénom</th>
+        <th>Nom</th>
+        <th>Email</th>
+        <th>Roles</th>
+        <th>Actions</th>
+        </thead>
+        <tbody>
+        {# On boucle sur les utilisateurs #}
+        {% for user in userRepository%}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.prenom}}</td>
+                <td>{{ user.nom }}</td>
+                <td>{{ user.email }}</td>
+                <td>{% for role in user.roles %}
+                        {% if role == "ROLE_USER" %}
+                            Utilisateur non validé
+                        {% elseif role == "ROLE_ADMIN" %}
+                            Administrateur
+                        {% elseif role == "ROLE_ADMINRH" %}
+                            Administrateur RH
+                        {% elseif role == "ROLE_BAKJY" %}
+                            Membre Bakjy group
+                        {% elseif role == "ROLE_USERSIMPLE" %}
+                            Membre externe
+                        {% endif %}
+                    {% endfor %}</td>
+                <td><a href="{{ path('app_edituser', {'id': user.id}) }}" class="btn btn-warning">Modifier</a></td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan=5>Il n'y a pas d'utilistaeur inscrit</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}
