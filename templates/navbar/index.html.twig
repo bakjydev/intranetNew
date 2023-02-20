@@ -79,9 +79,12 @@
                 </div>
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                        <div class="container-fluid bg-light mb-5">
+                        <div class="container-fluid mb-5">
                             {% if is_granted("ROLE_USER") %}
-                                <h3 class="text-dark text-center">Bonjour {{ app.user.prenom }}</h3>
+                                <figure class="d-inline-flex">
+                                    <img class="img-fluid rounded-circle mx-auto" src="{{ asset("assets/profile/" ~ app.user.imageName)}}" alt={{ app.user.imageName }} width="50px">
+                                    <h3 class="text-white text-center m-2">Bonjour {{ app.user.prenom }}</h3>
+                                </figure>
                             {% endif %}
                         </div>
                         {% if is_granted('ROLE_USER') %}
