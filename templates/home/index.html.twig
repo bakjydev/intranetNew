@@ -46,16 +46,17 @@
                             <div class="card-body">
                                 {% if nextBirthday %}
                                     {% set diff = now.diff(nextBirthday.birthday) %}
-                                    {% set years = diff.y %}
-                                    {% set days = diff.d %}
+                                    {% set years = diff.y + 1%}
+                                    {% set days = diff.days %}
                                     <img class="img-fluid rounded-circle mx-auto"
                                          src="{{ asset("assets/profile/" ~ nextBirthday.imageName) }}"
                                          alt={{ nextBirthday.imageName }} width="50px">
-                                    <p>Le prochain anniversaire est celui de {{ nextBirthday.prenom }} qui aura {{ years }} ans dans {{ days }} jours.</p>
+                                    <p>Le prochain anniversaire est celui de {{ nextBirthday.prenom }} qui aura {{ years }} ans</p>
                                     <p>{{ nextBirthday.birthday|date ('d,M,Y')}}</p>
                                 {% else %}
                                     <p>Aucun anniversaire à venir pour l'instant.</p>
                                 {% endif %}
+
                             </div>
                         </div>
                     </div>
