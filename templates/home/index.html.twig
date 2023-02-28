@@ -5,8 +5,8 @@
 {% block body %}
 
     <style>
-        .col-3 {
-            margin: 1rem;
+        .bg-primary {
+            color: indigo;
         }
     </style>
 
@@ -14,95 +14,152 @@
 
     <div class="row d-flex align-items-center justify-content-left">
         {% if is_granted('ROLE_USERSIMPLE') %}
-            <div class="col-2">
-                <div class="d-grid gap-2 mx-auto">
-                    <div class="card">
-                        <h5 class="card-header">BAKJY booking</h5>
-                        <div class="card-body">
-                            <h5 class="card-title">Réservation de la salle de réunion</h5>
-                            <p class="card-text">Vous souhaitez réserver la salle de réunion, passez par cet outil.</p>
-                            <a href="#" class="btn btn-primary">Réserver</a>
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col">
+                    </div>
+                    <div class="col-10 bg-primary rounded mb-5 p-5">
+                        <p class="h1 text-white">Bienvenue sur votre intranet</p>
+                    </div>
+                    <div class="col">
+                    </div>
+                </div>
+            </div>
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col-6 mx-5">
+                        <div class="card">
+                            <div class="card-header bg-primary text-white">
+                                Nos actualités
+                            </div>
+                            <div class="card-body bg-image">
+                                <h5 class="card-title">Special title treatment</h5>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional
+                                    content.</p>
+                                <a href="#" class="btn btn-primary">Lire maintenant</a>
+                            </div>
+                        </div>
+                        <div class="card text-center m-3">
+                            <div class="card-header bg-primary text-white">
+                                Prochains anniversaire
+                            </div>
+                            <div class="card-body">
+                                {% if nextBirthday %}
+                                    {% set diff = now.diff(nextBirthday.birthday) %}
+                                    {% set years = diff.y %}
+                                    {% set days = diff.d %}
+                                    <img class="img-fluid rounded-circle mx-auto"
+                                         src="{{ asset("assets/profile/" ~ nextBirthday.imageName) }}"
+                                         alt={{ nextBirthday.imageName }} width="50px">
+                                    <p>Le prochain anniversaire est celui de {{ nextBirthday.prenom }} qui aura {{ years }} ans dans {{ days }} jours.</p>
+                                    <p>{{ nextBirthday.birthday|date ('d,M,Y')}}</p>
+                                {% else %}
+                                    <p>Aucun anniversaire à venir pour l'instant.</p>
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
-                    <div class="card">
-                        <h5 class="card-header">Featured</h5>
-                        <div class="card-body">
-                            <h5 class="card-title">Special title treatment</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional
-                                content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card-header bg-primary text-white">
+                                Nos outils
+                            </div>
+                            <div class="card-body">
+                                <a href="{{ path('app_message') }}">
+                                    <button type="button" class="btn btn-primary btn-lg m-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+                                             fill="currentColor"
+                                             class="bi bi-envelope" viewBox="0 0 16 16">
+                                            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
+                                        </svg>
+                                        <br>Demande d'absences
+                                    </button>
+                                </a>
+                                <button type="button" class="btn btn-success btn-lg m-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                                         class="bi bi-calendar-event" viewBox="0 0 16 16">
+                                        <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"/>
+                                        <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                                    </svg>
+                                    <br>Bakjy Booking
+                                </button>
+                                <button type="button" class="btn btn-warning btn-lg m-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                                         class="bi bi-people-fill" viewBox="0 0 16 16">
+                                        <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
+                                    </svg>
+                                    <br>Organigramme
+                                </button>
+                                <button type="button" class="btn btn-info btn-lg m-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                                         class="bi bi-whatsapp" viewBox="0 0 16 16">
+                                        <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+                                    </svg>
+                                    <br>Annuaire
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card mt-2">
+                            <div class="card-header bg-primary text-white">
+                                Elements utiles
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Sky riviera</h5>
+
+                                <ul>
+                                    <li>Lockbox : azerty</li>
+                                    <li>Code WIFI: azerty</li>
+                                    <li>Code barriere: azerty</li>
+                                </ul>
+
+                                <h5 class="card-title">La Founderie</h5>
+
+                                <ul>
+                                    <li>Code WIFI: Dreamteam2022</li>
+                                    <li>Code porte d'entrée:<br> porte 1: 16A97 <br> porte 2: 28B36</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-3">
-                <div class="card text-center">
-                    <div class="card-header">
-                        Derniers arcticles
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                    <div class="card-footer text-muted">
-                        2 days ago
-                    </div>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="card text-center mb-2">
-                    <div class="card-header">
-                        Welcome
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Bienvenu sur votre espace</h5>
-                        <p class="card-text">Pour toute questions envoyer un mail à romain@bakjy.com ou
-                            anais@bakjy.com</p>
-                        <a href="mailto:romain@bakjy.com ?subject=Intranet &cc=anais@bakjy.com"
-                           class="btn btn-primary">Entrer en contact</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        Elements utiles
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Sky riviera</h5>
 
-                        <ul>
-                            <li>Lockbox : azerty</li>
-                            <li>Code WIFI: azerty</li>
-                            <li>Code barriere: azerty</li>
-                        </ul>
-
-                        <h5 class="card-title">La Founderie</h5>
-
-                        <ul>
-                            <li>Code WIFI: Dreamteam2022</li>
-                            <li>Code porte d'entrée:<br> porte 1: 16A97 <br> porte 2: 28B36</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-2">
-                <div class="card text-center">
-                    <div class="card-header">
-                        Prochains anniversaire
-                    </div>
-                    <div class="card-body">
-                        {% for user in userRepository %}
-                            <p class="">{{ user.prenom }} {{ user.nom }}</p>
-                            <p class="">{{ user.birthday|date('d-m-Y') }}</p>
-                        {% endfor %}
+        {% elseif is_granted('ROLE_USER') %}
+            <div class="row d-flex align-items-center justify-content-left">
+                <div class="container text-center">
+                    <div class="row">
+                        <div class="col">
+                        </div>
+                        <div class="col-10 bg-primary rounded mb-5 p-5">
+                            <p class="h1 text-white">En attente de validition</p>
+                        </div>
+                        <div class="col">
+                        </div>
                     </div>
                 </div>
             </div>
         {% else %}
-            <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-            <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_gxaD1dLQ25.json" background="transparent"
-                           speed="1" style="width: auto; height: 30em;" loop autoplay></lottie-player>
+            <div class="container text-center">
+                <div class="row align-items-start">
+                    <div class="col">
+                        <a href="{{ path('app_login') }}">
+                            <button type="button" class="btn btn-primary btn-lg">Connexion</button>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="{{ path('app_register') }}">
+                            <button type="button" class="btn btn-secondary btn-lg">Inscription
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+                <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_gxaD1dLQ25.json"
+                               background="transparent"
+                               speed="1" style="width: auto; height: 30em;" loop autoplay></lottie-player>
+            </div>
         {% endif %}
     </div>
 

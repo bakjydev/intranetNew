@@ -3,30 +3,53 @@
 {% block title %}Hello MessageController!{% endblock %}
 
 {% block body %}
-
-
-    {% apply inline_css %}
-        <style>
-            #message_end_time{
-                visibility: hidden;
-            }
-            #message_start_time{
-                visibility: hidden;
-            }
-        </style>
-    {% endapply %}
-
-
     <div class="navbar">{% include ('/navbar/index.html.twig') %}</div>
 
     <section class="container">
         <div class="row">
             <div class="col">
-                <h1>Envoyer un message</h1>
+                <h1>Messagerie</h1>
+                <button type="button" class="btn btn-primary position-relative">
+                    Reçu
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        {{ app.user.received|length }}<span class="visually-hidden">unread messages</span>
+                    </span>
+                </button>
                 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
                     Mes dossiers
                 </button>
+                <a class="btn btn-primary" href="{{ path('app_message_received') }}">Boite de réception</a>
+
+                <div class="card text-center mt-5">
+                    <div class="card-header">
+                        {{ message.title }}
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">De {{ message.sender.email }}</h5>
+                        <p class="card-text">{{ message.message }}</p>
+                        <h6 class="card-title">Congés</h6>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Type de congés</th>
+                                <th scope="col">Début</th>
+                                <th scope="col">Fin</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th><em>{{ message.typecp }}</em></th>
+                                <th><em>{{ message.start|date }}</em></th>
+                                <th><em>{{ message.end|date }}</em></th>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer text-muted">
+                        Le {{ message.createdAt|date }}
+                    </div>
+                </div>
 
                 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
                      aria-labelledby="offcanvasExampleLabel">
@@ -51,8 +74,6 @@
                         </div>
                     </div>
                 </div>
-
-                {{ form(formSend) }}
             </div>
         </div>
     </section>

@@ -64,7 +64,7 @@
     <nav class="navbar navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href={{ path('app_home') }}>
-                <h2>BakjyApp</h2>
+                <h2>BAKJYApp</h2>
             </a>
             <img src="{{ asset('assets/Symbole Noir.png') }}" alt="Bootstrap" width="auto" height="30">
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
@@ -82,7 +82,9 @@
                         <div class="container-fluid mb-5">
                             {% if is_granted("ROLE_USER") %}
                                 <figure class="d-inline-flex">
-                                    <img class="img-fluid rounded-circle mx-auto" src="{{ asset("assets/profile/" ~ app.user.imageName)}}" alt={{ app.user.imageName }} width="50px">
+                                    <img class="img-fluid rounded-circle mx-auto"
+                                         src="{{ asset("assets/profile/" ~ app.user.imageName) }}"
+                                         alt={{ app.user.imageName }} width="50px">
                                     <h3 class="text-white text-center m-2">Bonjour {{ app.user.prenom }}</h3>
                                 </figure>
                             {% endif %}
@@ -94,7 +96,7 @@
                         {% else %}
                             <li class="nav-item h2">
                                 <a class="nav-link active" aria-current="page"
-                                   href={{ path('app_login') }}>Connection</a>
+                                   href={{ path('app_login') }}>Connexion</a>
                             </li>
                             <li class="nav-item h2">
                                 <a class="nav-link" href={{ path('app_register') }}>Inscription</a>
@@ -111,8 +113,21 @@
                         <h3 class="title">Applications</h3>
                         <div class="row align-items-start mt-3">
                             <div class="col-12 ">
-                                <button type="button" class="btn btn-primary btn-circle btn-xl m-1 "></button>
-                                <button type="button" class="btn btn-success btn-circle btn-xl m-1"></button>
+                                <a href="{{ path('app_message') }}">
+                                    <button type="button" class="btn btn-primary btn-circle btn-xl m-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+                                             fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+                                            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
+                                        </svg>
+                                    </button>
+                                </a>
+                                <button type="button" class="btn btn-success btn-circle btn-xl m-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                                         class="bi bi-calendar-event" viewBox="0 0 16 16">
+                                        <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"/>
+                                        <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                                    </svg>
+                                </button>
                                 <button type="button" class="btn btn-info btn-circle btn-xl m-1"></button>
                                 <button type="button" class="btn btn-warning btn-circle btn-xl m-1"></button>
                             </div>
