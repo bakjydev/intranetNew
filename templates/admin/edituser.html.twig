@@ -11,11 +11,25 @@
     </style>
 
     <div class="navbar">{% include ('/navbar/index.html.twig') %}</div>
-    <div class="containerst ">
+    <div class="container ">
         <h1>Modifier l'utilisateur</h1>
         {{ form(userForm) }}
     </div>
 
 
 
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('js/datepicker.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('css/datepicker.min.css') }}">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            flatpicker('.js-datepicker', {
+                dateFormat: 'Y-m-d'
+            });
+        });
+    </script>
 {% endblock %}

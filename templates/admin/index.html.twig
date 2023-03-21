@@ -12,7 +12,6 @@
 
     <div class="navbar">{% include ('/navbar/index.html.twig') %}</div>
     <h1>Liste des utilisateurs</h1>
-
     <table class="table">
         <thead>
         <th>Prénom</th>
@@ -42,11 +41,17 @@
                         {% endif %}
                         /
                     {% endfor %}</td>
-                <td><a href="{{ path('app_edituser', {'id': user.id}) }}" class="btn btn-warning">Modifier</a></td>
+                <td>
+                    <a href="{{ path('app_edituser', {'id': user.id}) }}" class="btn btn-warning">Modifier</a>
+                    <form action="{{ path('app_delete_user', {id: user.id}) }}" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="btn btn-danger mt-2">Supprimer</button>
+                    </form>
+                </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan=5>Il n'y a pas d'utilistaeur inscrit</td>
+                <td colspan=5>Il n'y a pas d'utilisateur inscrit</td>
             </tr>
         {% endfor %}
         </tbody>

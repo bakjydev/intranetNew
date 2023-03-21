@@ -54,12 +54,18 @@ class EditUserType extends AbstractType
                     'class' => 'form-control'
                 ]
             ])
-            ->add('Birthday', DateType::class)
+            ->add('Birthday', DateType::class, [
+                'label' => 'Date de naissance',
+                'widget' => 'single_text',
+                'html5' => true,
+                'attr' => ['class' => 'js-datepicker form-control'],
+            ])
             ->add('imageFile', VichImageType::class, [
                 'attr' => [
                     'class' => 'form-control mb-3'
                 ],
-                'label' => 'Photo de profil'
+                'label' => 'Photo de profil',
+                'required' => false, // rendre le champ optionnel
             ])
             ->add('Valider', SubmitType::class, [
                 'attr' => [

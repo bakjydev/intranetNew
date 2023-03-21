@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\EditUserType;
 use App\Form\EditPhoto;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -50,5 +51,16 @@ class AdminController extends AbstractController
             'userForm' => $form->createView()
         ]);
 
+    }
+
+    #[Route('/admin/{id}', name: 'app_delete_user')]
+    public function deleteUser(User $user, EntityManagerInterface $entityManager, UserRepository $userRepository): Response
+    {
+        $entityManager->remove($user);
+        $entityManager->flush();
+
+        return $this->render('admin/index.html.twig', [
+            'userRepository' => $userRepository->findAll(),
+        ]);
     }
 }
